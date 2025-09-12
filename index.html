@@ -24,7 +24,7 @@
       width: 65%;
       max-width: 900px;
       margin: 0 auto;
-      margin-left: 30px; /* <-- TU PRZESUWASZ INTERFEJS W PRAWO dla telefonów i mniejszych ekranów */
+      margin-left: 30px;
     }
 
     header {
@@ -169,12 +169,17 @@
       }
 
       .container {
-        margin-left: 500px; /* <-- TU PRZESUWASZ INTERFEJS W PRAWO na komputerze (obok paska bocznego) */
+        margin-left: 500px;
         width: calc(100% - 330px);
+      }
+
+      /* Na komputerze ukrywamy przycisk w sekcji about */
+      .call-button-phone {
+        display: none;
       }
     }
 
-    /* RESPONSYWNOŚĆ: TELEFONY */
+    /* TELEFONY I TABLETY */
     @media screen and (max-width: 999px) {
       .container {
         width: 90%;
@@ -223,19 +228,14 @@
         font-size: 20px;
       }
 
-      footer {
-        font-size: 14px;
-      }
-    }
-
-    /* DLA KOMPUTERÓW: NAGŁÓWKI FELGA STALOWA/ALUMINIOWA DO LEWEJ */
-    @media screen and (min-width: 601px) {
-      h4 {
-        text-align: left;
+      /* Na telefonie ukrywamy sidebar */
+      .sidebar {
+        display: none;
       }
 
-      .contact-info {
-        text-align: center;
+      /* Przyciski telefoniczne widoczne tylko na telefonie */
+      .call-button-phone {
+        display: inline-block;
       }
     }
   </style>
@@ -263,7 +263,13 @@
       <h2>O nas</h2>
       <p>Firma MateCars zajmuje się obsługą mechaniczną samochodów. Zapraszamy na sezonową wymianę opon oraz sprzedaż opon nowych i używanych.</p>
       <p>Oferujemy pełny serwis mechaniczny samochodów osobowych, wulkanizację, serwis klimatyzacji, diagnostykę komputerową, pranie tapicerki oraz myjnię.</p>
-      <p>Sprawdź nasze opinie na Google: <a href="https://maps.app.goo.gl/d2oB6y5p7aGnemEq7" target="_blank" class="opinion-link">Warsztat MateCars Opinie</a></p>
+      <p>Sprawdź nasze opinie na Google: 
+        <a href="https://maps.app.goo.gl/d2oB6y5p7aGnemEq7" target="_blank" class="opinion-link">Warsztat MateCars Opinie</a>
+      </p>
+
+      <!-- PRZYCISK NA TELEFONIE -->
+      <a href="tel:577315818" class="call-button call-button-phone">Zadzwoń teraz</a>
+
       <img src="warsztatbaner.jpg" alt="Warsztat MateCars" class="about-image">
     </section>
 
@@ -320,8 +326,6 @@
         Telefon: 577-315-818<br>
         Adres: Młodnicka 52, 04-239 Warszawa
       </p>
-      <!-- PRZYCISK Z TELEFONEM -->
-      <a href="tel:577315818" class="call-button">Zadzwoń teraz</a>
     </section>
   </main>
 

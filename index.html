@@ -116,6 +116,25 @@
       line-height: 1.4;
     }
 
+    .call-button {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background: #ff8800;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .call-button:hover {
+      background: #ffcc00;
+      color: #000;
+      transform: scale(1.05);
+    }
+
     /* Pasek boczny na komputerze */
     @media screen and (min-width: 1000px) {
       body {
@@ -301,9 +320,10 @@
         Telefon: 577-315-818<br>
         Adres: Młodnicka 52, 04-239 Warszawa
       </p>
+      <!-- PRZYCISK Z TELEFONEM -->
+      <a href="tel:577315818" class="call-button">Zadzwoń teraz</a>
     </section>
   </main>
 
 </body>
 </html>
-

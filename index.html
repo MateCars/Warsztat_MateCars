@@ -1,328 +1,141 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Warsztat Samochodowy MateCars</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Warsztat Samochodowy MateCars</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #1f1f1f;
-      color: #f1f1f1;
-      line-height: 1.6;
-      padding-top: 80px;
-    }
+body { font-family:'Montserrat',sans-serif; background-color:#1f1f1f; color:#f1f1f1; line-height:1.6; padding-top:80px; }
 
-    .container {
-      width: 65%;
-      max-width: 900px;
-      margin: 0 auto;
-      margin-left: 30px;
-    }
+.container { width:65%; max-width:900px; margin:0 auto; margin-left:30px; }
 
-    header {
-      background: linear-gradient(90deg, #ff8800, #ffcc00);
-      color: white;
-      padding: 25px 0;
-      text-align: center;
-      font-size: 32px;
-      font-weight: 700;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
+header { background: linear-gradient(90deg, #ff8800, #ffcc00); color:white; padding:25px 0; text-align:center; font-size:32px; font-weight:700; position:fixed; top:0; width:100%; z-index:1000; box-shadow:0 4px 6px rgba(0,0,0,0.3); }
 
-    h2, h3, h4 {
-      color: #ffcc00;
-      margin-top: 30px;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
-    }
+h2,h3,h4 { color:#ffcc00; margin-top:30px; margin-bottom:10px; text-shadow:1px 1px 5px rgba(0,0,0,0.6); }
+h2,h3 { text-align:center; }
+h3 { font-size:28px; }
+h4 { font-size:20px; text-align:left; }
+p, li { font-size:18px; }
 
-    h2, h3 {
-      text-align: center;
-    }
+.about-image { width:50%; max-height:250px; object-fit:contain; margin:20px auto; display:block; border-radius:10px; box-shadow:0 0 10px rgba(255,136,0,0.4); }
 
-    h3 {
-      font-size: 28px;
-    }
+.pricing ul { list-style:none; padding:0; }
+.pricing ul li { background-color:#2c2c2c; margin:10px 0; padding:12px 18px; border-left:6px solid #ff8800; border-radius:8px; transition: all 0.3s ease; }
+.pricing ul li:hover { background-color:#ffcc00; color:#000; transform: translateX(5px); cursor: default; }
 
-    h4 {
-      font-size: 20px;
-      text-align: left;
-    }
+.opinion-link { color:#00aaff; text-decoration:none; font-weight:bold; transition:color 0.3s; }
+.opinion-link:hover { color:#ffaa00; }
 
-    p, li {
-      font-size: 18px;
-    }
+.contact-info { font-size:22px; font-weight:bold; margin-top:20px; color:#ffffff; text-align:center; line-height:1.4; }
 
-    .about-image {
-      width: 50%;
-      max-height: 250px;
-      object-fit: contain;
-      margin: 20px auto;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 136, 0, 0.4);
-    }
+.call-button { display:inline-block; margin-top:15px; padding:12px 25px; background:#ff8800; color:#fff; font-size:18px; font-weight:bold; text-decoration:none; border-radius:8px; transition: background 0.3s, transform 0.3s; }
+.call-button:hover { background:#ffcc00; color:#000; transform: scale(1.05); }
 
-    .pricing ul {
-      list-style: none;
-      padding: 0;
-    }
+/* Pasek boczny i minimapa na komputerze */
+@media screen and (min-width: 1000px) {
+  body { display:flex; flex-direction:row; padding-top:80px; }
 
-    .pricing ul li {
-      background-color: #2c2c2c;
-      margin: 10px 0;
-      padding: 12px 18px;
-      border-left: 6px solid #ff8800;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
+  .sidebar { width:280px; background-color:#2a2a2a; padding:30px 20px; position:fixed; top:80px; left:0; height:100%; overflow-y:auto; box-shadow:2px 0 6px rgba(0,0,0,0.5); }
+  .sidebar h4 { color:#ffcc00; font-size:20px; margin-bottom:8px; text-shadow:1px 1px 3px rgba(0,0,0,0.5); }
+  .sidebar p { color:#f1f1f1; font-size:17px; margin-bottom:20px; }
 
-    .pricing ul li:hover {
-      background-color: #ffcc00;
-      color: #000;
-      transform: translateX(5px);
-      cursor: default;
-    }
+  .container { margin-left:500px; width:calc(100% - 500px - 300px); }
 
-    .opinion-link {
-      color: #00aaff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+  /* Minimapa po prawej stronie */
+  .map-mini {
+    width: 300px; /* szerokość mapy */
+    height: 300px; /* wysokość mapy */
+    position: fixed;
+    top: 140px; /* odległość od góry strony – zmień aby przesunąć w górę/dół */
+    right: 30px; /* odległość od prawej krawędzi – zmień na left:10px aby przesunąć na lewo */
+    border: 2px solid #ff8800;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255,136,0,0.5);
+    overflow: hidden;
+  }
 
-    .opinion-link:hover {
-      color: #ffaa00;
-    }
+  .call-button-phone { display:none; }
+}
 
-    .contact-info {
-      font-size: 22px;
-      font-weight: bold;
-      margin-top: 20px;
-      color: #ffffff;
-      text-align: center;
-      line-height: 1.4;
-    }
-
-    .call-button {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 25px;
-      background: #ff8800;
-      color: #fff;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .call-button:hover {
-      background: #ffcc00;
-      color: #000;
-      transform: scale(1.05);
-    }
-
-    /* Pasek boczny na komputerze */
-    @media screen and (min-width: 1000px) {
-      body {
-        display: flex;
-        flex-direction: row;
-        padding-top: 80px;
-      }
-
-      .sidebar {
-        width: 280px;
-        background-color: #2a2a2a;
-        padding: 30px 20px;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        height: 100%;
-        overflow-y: auto;
-        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.5);
-      }
-
-      .sidebar h4 {
-        color: #ffcc00;
-        font-size: 20px;
-        margin-bottom: 8px;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-      }
-
-      .sidebar p {
-        color: #f1f1f1;
-        font-size: 17px;
-        margin-bottom: 20px;
-      }
-
-      .container {
-        margin-left: 500px;
-        width: calc(100% - 330px);
-      }
-
-      .call-button-phone {
-        display: none;
-      }
-    }
-
-    /* TELEFONY I TABLETY */
-    @media screen and (max-width: 999px) {
-      .container {
-        width: 90%;
-        padding: 0 10px;
-      }
-
-      header {
-        font-size: 24px;
-        padding: 20px 0;
-      }
-
-      .about {
-        margin-top: 40px;
-      }
-
-      h2, h3 {
-        font-size: 20px;
-        margin-top: 20px;
-        margin-bottom: 6px;
-      }
-
-      h4 {
-        font-size: 18px;
-        margin-top: 16px;
-        margin-bottom: 4px;
-      }
-
-      p, li {
-        font-size: 16px;
-        line-height: 1.3;
-        margin-bottom: 6px;
-      }
-
-      .about-image {
-        width: 100%;
-        max-height: 180px;
-        margin: 15px auto;
-      }
-
-      .contact-info {
-        font-size: 18px;
-        text-align: center;
-      }
-
-      .contact h3 {
-        font-size: 20px;
-      }
-
-      .sidebar {
-        display: none;
-      }
-
-      .call-button-phone {
-        display: inline-block;
-      }
-    }
-  </style>
+/* Telefony i tablety */
+@media screen and (max-width: 999px) {
+  .container { width:90%; padding:0 10px; }
+  header { font-size:24px; padding:20px 0; }
+  .about { margin-top:40px; }
+  h2,h3 { font-size:20px; margin-top:20px; margin-bottom:6px; }
+  h4 { font-size:18px; margin-top:16px; margin-bottom:4px; }
+  p, li { font-size:16px; line-height:1.3; margin-bottom:6px; }
+  .about-image { width:100%; max-height:180px; margin:15px auto; }
+  .contact-info { font-size:18px; text-align:center; }
+  .contact h3 { font-size:20px; }
+  .sidebar { display:none; }
+  .call-button-phone { display:inline-block; }
+  .map-mini { display:none; }
+}
+</style>
 </head>
 <body>
 
-  <header>
-    Warsztat Samochodowy MateCars
-  </header>
+<header>Warsztat Samochodowy MateCars</header>
 
-  <div class="sidebar">
-    <h4>📍 Gdzie jesteśmy</h4>
-    <p>Młodnicka 52<br>04-239 Warszawa</p>
+<div class="sidebar">
+  <h4>📍 Gdzie jesteśmy</h4>
+  <p>Młodnicka 52<br>04-239 Warszawa</p>
+  <h4>🕒 Godziny otwarcia</h4>
+  <p>Pon - Pt: 10:00 – 18:00<br>Sobota: Zamknięte<br>Niedziela: Zamknięte</p>
+  <h4>📞 Kontakt</h4>
+  <p>Tel: 577-315-818</p>
+</div>
 
-    <h4>🕒 Godziny otwarcia</h4>
-    <p>Pon - Pt: 10:00 – 18:00<br>Sobota: Zamknięte<br>Niedziela: Zamknięte</p>
+<main class="container">
+  <section class="about">
+    <h2>O nas</h2>
+    <p>Firma MateCars zajmuje się obsługą mechaniczną samochodów. Zapraszamy na sezonową wymianę opon oraz sprzedaż opon nowych i używanych.</p>
+    <p>Oferujemy pełny serwis mechaniczny samochodów osobowych, wulkanizację, serwis klimatyzacji, diagnostykę komputerową, pranie tapicerki oraz myjnię.</p>
+    <p>Sprawdź nasze opinie na Google: <a href="https://maps.app.goo.gl/d2oB6y5p7aGnemEq7" target="_blank" class="opinion-link">Warsztat MateCars Opinie</a></p>
 
-    <h4>📞 Kontakt</h4>
-    <p>Tel: 577-315-818</p>
-  </div>
+    <a href="tel:577315818" class="call-button call-button-phone">Zadzwoń teraz</a>
 
-  <main class="container">
-    <section class="about">
-      <h2>O nas</h2>
-      <p>Firma MateCars zajmuje się obsługą mechaniczną samochodów. Zapraszamy na sezonową wymianę opon oraz sprzedaż opon nowych i używanych.</p>
-      <p>Oferujemy pełny serwis mechaniczny samochodów osobowych, wulkanizację, serwis klimatyzacji, diagnostykę komputerową, pranie tapicerki oraz myjnię.</p>
-      <p>Sprawdź nasze opinie na Google: 
-        <a href="https://maps.app.goo.gl/d2oB6y5p7aGnemEq7" target="_blank" class="opinion-link">Warsztat MateCars Opinie</a>
-      </p>
+    <img src="warsztatbaner.jpg" alt="Warsztat MateCars" class="about-image">
+  </section>
 
-      <a href="tel:577315818" class="call-button call-button-phone">Zadzwoń teraz</a>
+  <section class="pricing">
+    <h2>Cennik usług mechanicznych</h2>
+    <ul>
+      <li>Serwis olejowy (wymiana oleju z filtrem): 60 zł</li>
+      <li>Wymiana kompletu filtrów (oleju, powietrza silnika, powietrza kabiny pasażerskiej): 150 zł</li>
+      <li>Wymiana klocków hamulcowych przód: 150 zł</li>
+      <li>Wymiana klocków hamulcowych tył: 150 zł</li>
+      <li>Wymiana łączników stabilizatora przód – 2 sztuki: 140 zł</li>
+      <li>Wymiana końcówki drążka kierowniczego – 1 sztuka: 100-120 zł</li>
+      <li>Wymiana sworznia wahacza: 100 zł</li>
+      <li>Wymiana amortyzatora (kolumna McPherson): 220 zł</li>
+      <li>Wymiana amortyzatora tył: 120 zł</li>
+      <li>Wymiana świec zapłonowych: 120 zł</li>
+      <li>Wymiana piasty koła: 150-250 zł</li>
+      <li>Wymiana chłodnicy: 320 zł</li>
+      <li>Zbieżność kół przód: 200 zł</li>
+    </ul>
+  </section>
 
-      <img src="warsztatbaner.jpg" alt="Warsztat MateCars" class="about-image">
-    </section>
+  <section class="contact">
+    <h3>Kontakt</h3>
+    <p class="contact-info">Telefon: 577-315-818<br>Adres: Młodnicka 52, 04-239 Warszawa</p>
+  </section>
+</main>
 
-    <section class="pricing">
-      <h2>Cennik usług mechanicznych</h2>
-      <ul>
-        <li>Serwis olejowy (wymiana oleju z filtrem): 60 zł</li>
-        <li>Wymiana kompletu filtrów (oleju, powietrza silnika, powietrza kabiny pasażerskiej): 150 zł</li>
-        <li>Wymiana klocków hamulcowych przód: 150 zł</li>
-        <li>Wymiana klocków hamulcowych tył: 150 zł</li>
-        <li>Wymiana łączników stabilizatora przód – 2 sztuki: 140 zł</li>
-        <li>Wymiana końcówki drążka kierowniczego – 1 sztuka: 100-120 zł</li>
-        <li>Wymiana sworznia wahacza: 100 zł</li>
-        <li>Wymiana amortyzatora (kolumna McPherson): 220 zł</li>
-        <li>Wymiana amortyzatora tył: 120 zł</li>
-        <li>Wymiana świec zapłonowych: 120 zł</li>
-        <li>Wymiana piasty koła: 150-250 zł</li>
-        <li>Wymiana chłodnicy: 320 zł</li>
-        <li>Zbieżność kół przód: 200 zł</li>
-      </ul>
-
-      <h3>Wymiana całych kół z wyważaniem</h3>
-      <ul>
-        <li>Felga: do 16" – 70 zł</li>
-        <li>Felga: od 17" – 80 zł</li>
-        <li>SUV, BUS, VAN – 90 zł</li>
-      </ul>
-
-      <h3>Wymiana opon z wyważaniem</h3>
-      <h4>Felga stalowa:</h4>
-      <ul>
-        <li>do 16" – 110 zł</li>
-        <li>od 17" – 120 zł</li>
-        <li>SUV, BUS, VAN – 170 zł</li>
-      </ul>
-
-      <h4>Felga aluminiowa:</h4>
-      <ul>
-        <li>do 16" – 120 zł</li>
-        <li>od 17" – 140 zł</li>
-        <li>SUV, BUS, VAN – 180 zł</li>
-      </ul>
-
-      <h3>Serwis klimatyzacji</h3>
-      <ul>
-        <li>Sezonowy serwis klimatyzacji, sprawdzenie szczelności, wymiana czynnika – 150 zł</li>
-        <li>Za każde nabite dodatkowo 100g czynnika – 30 zł</li>
-      </ul>
-    </section>
-
-    <section class="contact">
-      <h3>Kontakt</h3>
-      <p class="contact-info">
-        Telefon: 577-315-818<br>
-        Adres: Młodnicka 52, 04-239 Warszawa
-      </p>
-    </section>
-  </main>
+<!-- Minimapa z widokiem satelity -->
+<div class="map-mini">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2444.016449056823!2d21.115!3d52.267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ed55f0f7f9d07%3A0x6d8f74ec2b1c!2sM%C5%82odnicka%2052%2C%2004-239%20Warszawa!5e0!3m2!1spl!2spl&maptype=satellite" 
+    style="border:0; width:100%; height:100%;" 
+    allowfullscreen="" 
+    loading="lazy">
+  </iframe>
+</div>
 
 </body>
 </html>
